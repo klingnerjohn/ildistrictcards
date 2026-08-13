@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+#ffi{
+  --orange:  #fe5f05;
+  --orange2: #c44800;
+  --blue:    #13294b;
+  --blue2:   #1e3d6e;
+  --white:   #ffffff;
+  --cream:   #fdf8f4;
+  --ink:     #1a1a1a;
+  --muted:   #484848;
+  --light:   #e8ecf1;
+  --sans:    'Montserrat', sans-serif;
+}#ffi *, #ffi *::before, #ffi *::after{ box-sizing: border-box; margin: 0; padding: 0; }#ffi html{ scroll-behavior: smooth; }#ffi{ font-family: var(--sans); background: var(--cream); color: var(--ink); overflow-x: hidden; }#ffi section{
+  width: 100vw !important;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  box-sizing: border-box;
+}#ffi button{ cursor: pointer; font-family: var(--sans); border: none; }#ffi .hero{
+  background:
+    linear-gradient(rgba(19,41,75,0.45), rgba(19,41,75,0.45)),
+    url("hero.png") center/cover no-repeat;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: clamp(2.5rem,6vw,4rem) clamp(1.2rem,4vw,2rem) clamp(2rem,5vw,3rem);
+  position: relative; overflow: hidden;
+}#ffi .hero-kicker{
+  font-size: 15px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 24px;
+  opacity: 0; animation: fadeUp .6s .1s ease forwards;
+  position: relative; z-index: 2;
+}#ffi .hero-hed{
+  font-family: var(--sans);
+  font-size: clamp(2.6rem, 6.5vw, 5rem);
+  line-height: 1.05; color: var(--white);
+  max-width: 840px;
+  opacity: 0; animation: fadeUp .7s .25s ease forwards;
+  position: relative; z-index: 2;
+}#ffi .hero-hed em{ font-style: italic; color: var(--orange); }#ffi .hero-sub{
+  margin-top: 24px;
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  font-weight: 500; color: rgba(255,255,255,0.88);
+  max-width: 560px; line-height: 1.7;
+  opacity: 0; animation: fadeUp .7s .4s ease forwards;
+  position: relative; z-index: 2;
+}#ffi .section{ padding: 80px 24px; position: relative; }#ffi .section-inner{ max-width: 1100px; margin: 0 auto; width: 100%; }#ffi .section-cream{ background: var(--cream); }#ffi .section-white{ background: var(--white); }#ffi .section-blue{ background: var(--blue); }#ffi .section-orange{ background: var(--orange); }#ffi .section-white::before, #ffi .section-cream::before{
+  content: ''; display: block;
+  position: absolute; top: 0; left: 0; right: 0; height: 5px;
+  background: linear-gradient(90deg, var(--orange), var(--orange2));
+}#ffi .eyebrow{
+  display: block;
+  font-size: 15px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 14px;
+}#ffi .eyebrow-light{ color: rgba(254,95,5,0.9); }#ffi .section-hed{
+  font-family: var(--sans);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  color: var(--blue); line-height: 1.08; margin-bottom: 14px;
+}#ffi .section-hed-light{ color: var(--white); }#ffi .section-sub{
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  font-weight: 500; color: var(--muted); line-height: 1.7; max-width: 620px;
+}#ffi .section-sub-light{ color: rgba(255,255,255,0.82); }#ffi .reveal{
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}#ffi .reveal.vis{ opacity: 1; transform: none; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {#ffi .controls-row{ grid-template-columns: 1fr; }#ffi .section{ padding: 60px 20px; }#ffi footer{ padding: 36px 20px; }#ffi .action-form{ flex-direction: column; align-items: stretch; }#ffi #emailInput{ max-width: 100%; }
+}#ffi .hero-gif-wrap{
+  margin: 24px auto 0;
+  width: min(1100px, 95vw);
+}#ffi .hero-gif-wrap img{
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}#ffi #district-card{ animation: fadeUp 0.4s ease; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }#ffi .dc-wrap{ background:#fff; font-family:'Montserrat',sans-serif; border-radius:10px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.3); }#ffi .dc-head{ background:#13294b; padding:20px 24px; }#ffi .dc-head-label{ font-size:12px; font-weight:700; color:rgba(255,255,255,0.45); letter-spacing:0.12em; text-transform:uppercase; margin-bottom:4px; }#ffi .dc-head-name{ font-size: clamp(17px, calc(14.5px + 0.66vw), 24px); font-weight:900; color:#fff; line-height:1.1; }#ffi .dc-head-meta{ font-size: clamp(14px, calc(13.3px + 0.19vw), 16px); color:#fff; margin-top:4px; }#ffi .dc-grid{ display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid #eee; }
+@media (max-width:640px) {#ffi .dc-grid{ grid-template-columns:1fr; border-bottom:none; }#ffi .dc-spend-desktop{ display:none !important; }
+}#ffi .dc-spend-mobile{ display:none; }
+@media (max-width:640px) {#ffi .dc-spend-mobile{ display:block; border-top:1px solid #eee; }
+}#ffi .dc-prof{ padding:22px 20px 22px 24px; border-right:1px solid #eee; }#ffi .dc-spend{ padding:22px 24px 22px 20px; background:#fdf8f4; border-left:1px solid #eee; }#ffi .dc-eyebrow{ font-size:12px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#13294b; margin-bottom:4px; }#ffi .dc-eyebrow-sub{ font-size:11px; color:#aaa; font-weight:600; letter-spacing:0.05em; display:block; margin-bottom:14px; }#ffi .dc-stat-row{ margin-bottom:18px; }#ffi .dc-pct{ font-size: clamp(36px, calc(30.4px + 1.5vw), 52px); font-weight:900; color:#fe5f05; line-height:1; }#ffi .dc-pct-label{ font-size:15px; font-weight:700; color:#1a1a1a; line-height:1.35; }#ffi .dc-bar-track{ height:9px; background:#e8e8e8; border-radius:5px; overflow:hidden; margin-top:6px; }#ffi .dc-bar-fill{ height:100%; border-radius:5px; background:#fe5f05; }#ffi .dc-spend-amt{ font-size: clamp(29px, calc(24.4px + 1.22vw), 42px); font-weight:900; color:#13294b; line-height:1; margin-bottom:10px; }#ffi .dc-pill{ display:inline-block; background:#fe5f05; color:#fff; font-size:14px; font-weight:900; padding:6px 14px; border-radius:20px; letter-spacing:0.04em; margin-bottom:10px; }#ffi .dc-spend-was{ font-size:14px; color:#999; }#ffi .dc-race-wrap{ padding:20px 24px; }#ffi .dc-race-hed{ font-size:12px; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:#13294b; margin-bottom:16px; }#ffi .dc-race-group{ margin-bottom:18px; }#ffi .dc-race-name{ font-size:15px; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#13294b; margin-bottom:8px; }#ffi .dc-race-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }#ffi .dc-race-stat-label{ font-size:13px; font-weight:600; color:#666; }#ffi .dc-race-pct{ font-size: clamp(15px, calc(12.5px + 0.66vw), 22px); font-weight:900; color:#fe5f05; float:right; }#ffi .dc-grad{ border-top:1px solid #eee; padding:16px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px; }#ffi .dc-grad-label{ font-size:13px; font-weight:800; letter-spacing:0.1em; text-transform:uppercase; color:#13294b; }#ffi .dc-grad-val{ font-size: clamp(27px, calc(23.1px + 1.03vw), 38px); font-weight:900; color:#13294b; line-height:1; }#ffi .dc-grad-sub{ font-size:14px; font-weight:600; color:#666; }#ffi .dc-source{ padding:10px 24px 14px; border-top:1px solid #f0f0f0; font-size:12px; color:#bbb; font-weight:500; }#ffi .dc-narrative{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(15px, calc(12.5px + 0.66vw), 22px);
+  line-height: 1.35;
+  color: #fe5f05;
+  margin: 0 0 20px 0;
+  padding: 0;
+}#ffi .dc-narrative-conclude{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(15px, calc(12.5px + 0.66vw), 22px);
+  line-height: 1.35;
+  color: #fe5f05;
+  margin: 0 0 20px 0;
+  padding: 0;
+}#ffi .hero-bridge{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(2.25rem, 6.5vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 auto 0.42em;
+  max-width: 16ch;
+  text-wrap: balance;
+}#ffi .hero-bridge-num{
+  color: #fe5f05;
+  font-weight: 900;
+}
+
+
+
+@media (max-width: 767px) {#ffi #explorer .section-hed{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(21px, calc(17.8px + 0.85vw), 30px);
+  }#ffi #explorer .section-hed span{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+  }
+}#ffi html, #ffi{
+  overflow-x: hidden;
+}#ffi .ns3-wrap{ max-width:1100px; margin:0 auto; width:100%; }#ffi .ns3-banner{ background:#13294b; padding:28px 24px; text-align:center;
+               margin-bottom:20px; margin-left:calc(-50vw + 50%); width:100vw;
+               font-family:'Montserrat',sans-serif; font-weight:900;
+               font-size:clamp(24px,2.8vw,34px); color:#fff; line-height:1.35;
+               position:relative; }#ffi .ns3-div{ border:none; margin:12px 0; }#ffi .ns3-2col{ display:grid; grid-template-columns:1fr 1fr; gap:48px; }#ffi .ns3-stat{ text-align:center; }#ffi .ns3-stat > svg{ display:block; margin:0 auto 14px; }#ffi .ns3-num{ font-family:'Montserrat',sans-serif; font-weight:800;
+               font-size:clamp(56px,6vw,80px); color:#fe5f05; line-height:1;
+               display:block; }#ffi .ns3-only{ font-family:'Montserrat',sans-serif; font-weight:700;
+               font-size:clamp(20px,2.2vw,26px); color:#13294b; display:block; margin-bottom:2px; }#ffi .ns3-lbl{ font-family:'Montserrat',sans-serif; font-weight:700;
+               font-size:clamp(17px,1.9vw,22px); color:#13294b;
+               line-height:1.4; margin-top:8px; }
+
+
+@media (min-width: 640px) {#ffi .ns3-2col{ justify-content:center; }#ffi .ns3-stat-icon{ display:flex; align-items:center; gap:32px; text-align:center; justify-content:center; }#ffi .ns3-stat-icon svg{ flex-shrink:0; display:block; margin:0; }#ffi .ns3-stat-icon .ns3-text{ display:flex; flex-direction:column; align-items:center; }#ffi .ns3-stat-icon .ns3-lbl{ margin-top:4px; }
+}
+
+@media (max-width: 639px) {#ffi .ns3-stat-icon{ text-align:center; }#ffi .ns3-stat-icon svg{ display:block; margin:0 auto 12px; }#ffi .ns3-stat-icon .ns3-text{ display:block; text-align:center; }
+}#ffi .ns3-tbl-wrap{ display:grid; grid-template-columns:1fr; gap:12px; }#ffi .ns3-icol{ display:flex; align-items:center; gap:12px; padding:4px 0; }#ffi .ns3-icol-lbl{ font-family:'Montserrat',sans-serif; font-weight:900;
+                font-size:clamp(20px,2vw,28px); color:#13294b; line-height:1.3; }#ffi .ns3-tbl{ width:100%; border-collapse:collapse;
+                font-family:'Montserrat',sans-serif; }#ffi .ns3-tbl th{ padding:7px 10px; font-size:clamp(16px,1.8vw,22px); font-weight:900;
+                color:#13294b; border-bottom:2px solid #fe5f05;
+                text-align:center; }#ffi .ns3-tbl td{ padding:7px 10px; font-size:clamp(21px,2.6vw,32px);
+                font-weight:900; color:#fe5f05; text-align:center;
+                border-bottom:1px solid #e8e0d8; }#ffi .ns3-tbl td.ns3-rl{ font-size:clamp(16px,1.8vw,22px); color:#13294b; text-align:left;
+                     font-weight:900; }#ffi .ns3-grad{ display:flex; align-items:center; gap:24px; flex-wrap:wrap; justify-content:center; text-align:center; }#ffi .ns3-grad-icon{ flex-shrink:0; padding:4px; }#ffi .ns3-grad-num{ font-family:'Montserrat',sans-serif; font-weight:800;
+                 font-size:clamp(56px,6vw,80px); color:#fe5f05; line-height:1; display:block; }#ffi .ns3-grad-txt{ font-family:'Montserrat',sans-serif; font-weight:700;
+                 font-size:clamp(20px,2.2vw,26px); color:#13294b;
+                 margin-top:8px; line-height:1.5; }
+
+
+@media (min-width:640px) {#ffi .ns3-tbl-wrap{ grid-template-columns:180px 1fr; align-items:center; gap:28px; }#ffi .ns3-icol{ flex-direction:column; align-items:center; text-align:center; justify-content:center; gap:6px; }
+}
+@media (max-width:639px) {#ffi .ns3-2col{ grid-template-columns:1fr; gap:24px; max-width:300px; margin:0 auto; }
+}#ffi .hero-stat-mobile{ display: none !important; }
+@media (max-width: 767px) {#ffi .hero-stat-mobile{
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 0;
+    margin: 0 -20px 0;
+    padding: 12px 28px 20px;
+    width: calc(100% + 40px);
+    min-height: 180px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }#ffi .hsm-frame{
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 22px 20px 28px;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }#ffi .hsm-frame.active{ opacity: 1; }#ffi .hsm-top{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(15px, calc(12.5px + 0.66vw), 22px);
+    color: #fff;
+    line-height: 1.2;
+  }#ffi .hsm-pct{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: clamp(39px, calc(33px + 1.6vw), 56px);
+    color: #fe5f05;
+    line-height: 1;
+    display: inline-block;
+    position: relative;
+    margin: 0 4px;
+  }#ffi .hsm-bottom{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: clamp(15px, calc(12.5px + 0.66vw), 22px);
+    color: #fff;
+    line-height: 1.4;
+    margin-top: 6px;
+  }#ffi .hsm-verb{ color: #fe5f05; font-style: italic; }
+}#ffi .hero-stat-desktop{ display: none !important; }#ffi .ffi-btn-br{ display: none; }
+@media (min-width: 768px) {#ffi .hero-gif-wrap{ display: none; }#ffi .hero-stat-desktop{
+    display: block !important;
+    margin: 24px auto 0;
+    width: min(900px, 92vw);
+    position: relative;
+    min-height: 300px;
+  }#ffi .hero{ min-height: 640px; padding-bottom: 28px; }#ffi .ffi-btn-br{ display: inline; }
+}#ffi .hsd-frame{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  text-align: center;
+  padding: 16px 20px;
+  gap: 0;
+}#ffi .hsd-frame.active{ opacity: 1; }#ffi .hsd-line1{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(26px, 2.8vw, 40px);
+  color: #fff;
+  line-height: 1;
+  margin: 0;
+}#ffi .hsd-line2{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(26px, 2.8vw, 40px);
+  color: #fff;
+  line-height: 1.3;
+  margin: 0;
+}#ffi .hsd-line3{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: clamp(26px, 2.8vw, 40px);
+  color: #fff;
+  line-height: 1.3;
+  margin: 0;
+}#ffi .hsd-pct{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(68px, 9vw, 124px);
+  color: #fe5f05;
+  display: inline-block;
+  line-height: 1;
+  margin: 0 4px;
+}#ffi .hsd-verb{ color: #fe5f05; font-style: italic; }#ffi .dn-banner{
+  background: #13294b;
+  padding: 28px 24px;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-left: calc(-50vw + 50%);
+  width: 100vw;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(24px, 2.8vw, 34px);
+  color: #fff;
+  line-height: 1.35;
+  position: relative;
+}
+@media (max-width: 639px) {#ffi .dn-banner{ font-size: clamp(17px, 5vw, 24px); padding: 22px 20px;
+               margin-left: calc(-50vw + 50%); width: 100vw; }
+}
+@media (max-width: 374px) {#ffi .dn-banner{ font-size: 15px; padding: 18px 12px; }
+}#ffi #district-narrative{
+  display: none;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  background: #fff;
+  padding: 42px 24px 48px;
+  margin-top: 32px;
+}#ffi #district-narrative .ns3-wrap{ max-width: 1100px; margin: 0 auto; }#ffi .dn-header{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: clamp(39px, 5.3vw, 54px);
+  color: #13294b;
+  text-align: center;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}#ffi .dn-subheader{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: clamp(14px, 1.6vw, 18px);
+  color: #484848;
+  text-align: center;
+  margin-bottom: 24px;
+}#ffi .dn-single-stat{ text-align: center; padding: 8px 0; }
+
+
+
+
+
+@media (max-width: 639px) {#ffi .ns3-tbl th{ padding: 4px 4px; font-size: clamp(13px, 3.5vw, 17px); }#ffi .ns3-tbl td{ padding: 4px 4px; font-size: clamp(19px, 5.5vw, 28px); }#ffi .ns3-tbl td.ns3-rl{ font-size: clamp(13px, 3.5vw, 17px); padding-left: 2px; }#ffi .ns3-tbl-wrap{ overflow-x: auto; -webkit-overflow-scrolling: touch; }#ffi .ns3-icol-lbl{ font-size: 15px; }#ffi .ns3-icol{ justify-content: center; text-align: center; }#ffi .ns3-grad{ flex-direction: column; align-items: center; text-align: center; gap: 8px; }#ffi .ns3-wrap{ padding: 0; }#ffi #ns3-section .ns3-wrap > div[style*="flex-wrap"], #ffi #district-narrative .ns3-wrap > div[style*="flex-wrap"]{
+    justify-content: center;
+  }#ffi #ns3-section .ns3-wrap > div[style*="flex-wrap"] > div, #ffi #district-narrative .ns3-wrap > div[style*="flex-wrap"] > div{
+    flex: 0 0 auto;
+    width: auto;
+    min-width: unset;
+    max-width: 300px;
+  }#ffi .ns3-banner{ font-size: clamp(20px, 5.6vw, 28px); padding: 22px 16px; }#ffi .hero{ min-height: 380px; }#ffi .hero-bridge{ font-size: clamp(2.25rem, 6.5vw, 4rem); }#ffi #ctaForm{ flex-direction: column; align-items: stretch; }#ffi #emailInput{ max-width: 100%; min-width: unset; }#ffi .section{ padding: 48px 16px; }
+}
+
+
+@media (max-width: 374px) {#ffi .ns3-tbl td{ font-size: clamp(14px, calc(13.3px + 0.19vw), 16px); padding: 3px 3px; }#ffi .ns3-tbl th{ font-size: 13px; padding: 3px 3px; }#ffi .ns3-tbl td.ns3-rl{ font-size: 13px; }#ffi .ns3-banner{ font-size: 15px; padding: 18px 12px; }#ffi .hero-bridge{ font-size: clamp(14px, calc(12.6px + 0.38vw), 18px); }#ffi .hsm-top, #ffi .hsm-bottom{ font-size: clamp(14px, calc(12.6px + 0.38vw), 18px); }#ffi .hsm-pct{ font-size: clamp(31px, calc(26.4px + 1.22vw), 44px); }
+}#ffi .ns3-tbl-mobile-only{ display: none; }#ffi .ns3-tbl-desktop-only{ display: table; }
+@media (max-width: 639px) {#ffi .ns3-tbl-mobile-only{ display: table; width: 100%; }#ffi .ns3-tbl-desktop-only{ display: none; }#ffi .ns3-tbl-subhead td{
+    font-size: clamp(10px, 2.8vw, 13px) !important;
+    font-weight: 900 !important;
+    color: #13294b !important;
+    border-bottom: 2px solid #fe5f05 !important;
+    border-top: 8px solid transparent !important;
+    text-align: center;
+    padding: 4px 4px;
+  }
+}
+</style>
+</helmet>
+<div id="ffi">
+<section class="hero">
+  <p class="hero-bridge">Illinoisans pay the nation’s <span style="color:#fe5f05;">highest</span> property taxes, and yet…</p>
+
+  <div id="hero-cycle" style="margin:24px auto 0; max-width:900px; display:grid;">
+    <p class="hcyc" style="grid-area:1/1; margin:0; text-align:center; opacity:1; transition:opacity .7s ease;"><span style="display:block; font-family:'Montserrat',sans-serif; font-weight:900; color:#fe5f05; font-size:clamp(38px,6vw,62px); line-height:1.05;">1.1 million</span><span style="display:block; font-family:'Montserrat',sans-serif; font-weight:800; color:#fff; font-size:clamp(30px,4.4vw,44px); line-height:1.15; text-wrap:balance;">students statewide<br>can't <span style="color:var(--orange);">read</span> at grade level.</span></p>
+    <p class="hcyc" style="grid-area:1/1; margin:0; text-align:center; opacity:0; transition:opacity .7s ease;"><span style="display:block; font-family:'Montserrat',sans-serif; font-weight:900; color:#fe5f05; font-size:clamp(38px,6vw,62px); line-height:1.05;">1.3 million</span><span style="display:block; font-family:'Montserrat',sans-serif; font-weight:800; color:#fff; font-size:clamp(30px,4.4vw,44px); line-height:1.15; text-wrap:balance;">students statewide<br>can't <span style="color:var(--orange);">do math</span> at grade level.</span></p>
+  </div>
+</section>
+
+
+<section style="background:#fe5f05;padding:45px 24px 45px;">
+  <div style="text-align:center;">
+    <a href="#explorer" style="display:inline-block; background:var(--blue); color:#fff; text-decoration:none;
+              font-family:'Montserrat',sans-serif; font-weight:900; font-size: clamp(21px, calc(19.9px + 0.28vw), 24px);
+              letter-spacing:0.06em; text-transform:uppercase; line-height:1.05;
+              padding:18px 36px; border-radius:8px;
+              transition:transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 28px rgba(19,41,75,0.5)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+      Click here to see how your<br class="ffi-btn-br"> school district is doing
+    </a>
+  </div>
+</section>
+
+
+
+<section id="ns3-section" style="background:#fff; padding:12px 24px 24px;">
+ <div class="ns3-wrap">
+
+  <div class="ns3-banner">Illinois students can’t read or do math at grade level…</div>
+
+  <div style="max-width:700px; margin:0 auto;">
+  <div class="ns3-2col">
+    <div class="ns3-stat ns3-stat-icon">
+      <svg width="96" height="96" sc-camel-view-box="0 0 72 72" xmlns="http://www.w3.org/2000/svg"><path d="M4 8C4 8 32 2 36 10C40 2 68 8 68 8L68 62C68 62 42 56 36 64C30 56 4 62 4 62Z" fill="#13294b"></path><line x1="36" y1="10" x2="36" y2="64" stroke="#fff" stroke-width="2.5"></line><line x1="12" y1="20" x2="32" y2="17" stroke="#fff" stroke-width="2" stroke-linecap="round"></line><line x1="12" y1="30" x2="32" y2="27" stroke="#fff" stroke-width="2" stroke-linecap="round"></line><line x1="12" y1="40" x2="32" y2="37" stroke="#fff" stroke-width="2" stroke-linecap="round"></line><line x1="40" y1="17" x2="60" y2="20" stroke="#fff" stroke-width="2" stroke-linecap="round"></line><line x1="40" y1="27" x2="60" y2="30" stroke="#fff" stroke-width="2" stroke-linecap="round"></line><line x1="40" y1="37" x2="60" y2="40" stroke="#fff" stroke-width="2" stroke-linecap="round"></line></svg>
+      <div class="ns3-text">
+        <span class="ns3-only">Only</span>
+        <span class="ns3-num">39%</span>
+        <p class="ns3-lbl">of all students statewide are<br>proficient in <strong>READING</strong></p>
+      </div>
+    </div>
+    <div class="ns3-stat ns3-stat-icon">
+      <svg width="96" height="96" sc-camel-view-box="0 0 72 72" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="64" height="64" rx="9" fill="#13294b"></rect><line x1="36" y1="4" x2="36" y2="68" stroke="#fff" stroke-width="1.5" opacity="0.3"></line><line x1="4" y1="36" x2="68" y2="36" stroke="#fff" stroke-width="1.5" opacity="0.3"></line><text x="18" y="18" font-size="22" font-weight="900" fill="#fff" font-family="Arial" text-anchor="middle" dominant-baseline="central">+</text><text x="54" y="18" font-size="22" font-weight="900" fill="#fff" font-family="Arial" text-anchor="middle" dominant-baseline="central">−</text><text x="18" y="54" font-size="20" font-weight="900" fill="#fff" font-family="Arial" text-anchor="middle" dominant-baseline="central">×</text><text x="54" y="54" font-size="20" font-weight="900" fill="#fff" font-family="Arial" text-anchor="middle" dominant-baseline="central">÷</text></svg>
+      <div class="ns3-text">
+        <span class="ns3-only">Only</span>
+        <span class="ns3-num">28%</span>
+        <p class="ns3-lbl">of all students statewide are<br>proficient in <strong>MATH</strong></p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <hr class="ns3-div" style="margin:27px 0;">
+
+  <div style="max-width:680px; margin:0 auto;">
+  <div class="ns3-tbl-wrap">
+    <div class="ns3-icol"><svg width="72" height="64" sc-camel-view-box="-4 -4 88 72" xmlns="http://www.w3.org/2000/svg" overflow="visible"><circle cx="18" cy="14" r="10" fill="#13294b" opacity="0.45"></circle><ellipse cx="18" cy="46" rx="16" ry="12" fill="#13294b" opacity="0.45"></ellipse><circle cx="40" cy="10" r="12" fill="#13294b"></circle><ellipse cx="40" cy="46" rx="20" ry="14" fill="#13294b"></ellipse><circle cx="63" cy="14" r="10" fill="#13294b" opacity="0.65"></circle><ellipse cx="63" cy="46" rx="16" ry="12" fill="#13294b" opacity="0.65"></ellipse></svg><span class="ns3-icol-lbl">Proficiency<br>by Race</span></div>
+    <sc-raw-table class="ns3-tbl ns3-tbl-desktop-only">
+      <sc-raw-thead><sc-raw-tr><sc-raw-th style="text-align:left;"></sc-raw-th><sc-raw-th>Black</sc-raw-th><sc-raw-th>Hispanic</sc-raw-th><sc-raw-th>White</sc-raw-th><sc-raw-th>Asian</sc-raw-th></sc-raw-tr></sc-raw-thead>
+      <sc-raw-tbody>
+        <sc-raw-tr><sc-raw-td class="ns3-rl">Reading</sc-raw-td><sc-raw-td>20%</sc-raw-td><sc-raw-td>27%</sc-raw-td><sc-raw-td>50%</sc-raw-td><sc-raw-td>67%</sc-raw-td></sc-raw-tr>
+        <sc-raw-tr><sc-raw-td class="ns3-rl">Math</sc-raw-td><sc-raw-td>9%</sc-raw-td><sc-raw-td>15%</sc-raw-td><sc-raw-td>38%</sc-raw-td><sc-raw-td>61%</sc-raw-td></sc-raw-tr>
+      </sc-raw-tbody>
+    </sc-raw-table>
+    <sc-raw-table class="ns3-tbl ns3-tbl-mobile-only">
+      <sc-raw-thead><sc-raw-tr><sc-raw-th style="text-align:left;"></sc-raw-th><sc-raw-th>Reading</sc-raw-th><sc-raw-th>Math</sc-raw-th></sc-raw-tr></sc-raw-thead>
+      <sc-raw-tbody>
+        <sc-raw-tr><sc-raw-td class="ns3-rl">Black</sc-raw-td><sc-raw-td>20%</sc-raw-td><sc-raw-td>9%</sc-raw-td></sc-raw-tr>
+        <sc-raw-tr><sc-raw-td class="ns3-rl">Hispanic</sc-raw-td><sc-raw-td>27%</sc-raw-td><sc-raw-td>15%</sc-raw-td></sc-raw-tr>
+        <sc-raw-tr><sc-raw-td class="ns3-rl">White</sc-raw-td><sc-raw-td>50%</sc-raw-td><sc-raw-td>38%</sc-raw-td></sc-raw-tr>
+        <sc-raw-tr><sc-raw-td class="ns3-rl">Asian</sc-raw-td><sc-raw-td>67%</sc-raw-td><sc-raw-td>61%</sc-raw-td></sc-raw-tr>
+      </sc-raw-tbody>
+    </sc-raw-table>
+  </div>
+  </div>
+
+  <hr class="ns3-div">
+  <div class="ns3-banner">…yet education officials push students from grade to grade…</div>
+
+  <div style="max-width:680px; margin:0 auto;">
+  <div class="ns3-tbl-wrap">
+    <div class="ns3-icol"><svg width="72" height="64" sc-camel-view-box="-4 -4 88 80" xmlns="http://www.w3.org/2000/svg" overflow="visible"><circle cx="12" cy="50" r="8" fill="#13294b"></circle><ellipse cx="12" cy="66" rx="11" ry="8" fill="#13294b"></ellipse><circle cx="36" cy="38" r="10" fill="#13294b"></circle><ellipse cx="36" cy="57" rx="14" ry="10" fill="#13294b"></ellipse><circle cx="64" cy="22" r="13" fill="#13294b"></circle><ellipse cx="64" cy="47" rx="18" ry="13" fill="#13294b"></ellipse></svg><span class="ns3-icol-lbl">Reading Proficiency<br>by Grade</span></div>
+    <sc-raw-table class="ns3-tbl ns3-tbl-desktop-only">
+      <sc-raw-thead><sc-raw-tr><sc-raw-th>Grade 3</sc-raw-th><sc-raw-th>Grade 4</sc-raw-th><sc-raw-th>Grade 5</sc-raw-th><sc-raw-th>Grade 6</sc-raw-th><sc-raw-th>Grade 7</sc-raw-th><sc-raw-th>Grade 8</sc-raw-th></sc-raw-tr></sc-raw-thead>
+      <sc-raw-tbody><sc-raw-tr><sc-raw-td>31%</sc-raw-td><sc-raw-td>38%</sc-raw-td><sc-raw-td>39%</sc-raw-td><sc-raw-td>47%</sc-raw-td><sc-raw-td>43%</sc-raw-td><sc-raw-td>50%</sc-raw-td></sc-raw-tr></sc-raw-tbody>
+    </sc-raw-table>
+    <sc-raw-table class="ns3-tbl ns3-tbl-mobile-only">
+      <sc-raw-thead><sc-raw-tr><sc-raw-th>Grade 3</sc-raw-th><sc-raw-th>Grade 4</sc-raw-th><sc-raw-th>Grade 5</sc-raw-th></sc-raw-tr></sc-raw-thead>
+      <sc-raw-tbody>
+        <sc-raw-tr><sc-raw-td>31%</sc-raw-td><sc-raw-td>38%</sc-raw-td><sc-raw-td>39%</sc-raw-td></sc-raw-tr>
+        <sc-raw-tr class="ns3-tbl-subhead"><sc-raw-td>Grade 6</sc-raw-td><sc-raw-td>Grade 7</sc-raw-td><sc-raw-td>Grade 8</sc-raw-td></sc-raw-tr>
+        <sc-raw-tr><sc-raw-td>47%</sc-raw-td><sc-raw-td>43%</sc-raw-td><sc-raw-td>50%</sc-raw-td></sc-raw-tr>
+      </sc-raw-tbody>
+    </sc-raw-table>
+  </div>
+  </div>
+
+  <hr class="ns3-div">
+  <div class="ns3-banner">…and graduate a vast majority who aren't ready…</div>
+
+  <div class="ns3-grad">
+    <div class="ns3-grad-icon"><svg width="80" height="70" sc-camel-view-box="0 0 90 78" xmlns="http://www.w3.org/2000/svg">
+  <!-- Diamond/flat cap top -->
+  <polygon points="45,4 8,26 45,42 82,26" fill="#13294b"></polygon>
+  <!-- Cap underside / head band -->
+  <path d="M20 30 L20 52 Q45 64 70 52 L70 30 L45 42 Z" fill="#13294b"></path>
+  <!-- Tassel string from right corner -->
+  <line x1="80" y1="28" x2="80" y2="52" stroke="#fe5f05" stroke-width="3.5" stroke-linecap="round"></line>
+  <!-- Tassel horizontal bar -->
+  <line x1="74" y1="52" x2="86" y2="52" stroke="#fe5f05" stroke-width="3" stroke-linecap="round"></line>
+  <!-- Tassel fringe -->
+  <line x1="76" y1="52" x2="74" y2="66" stroke="#fe5f05" stroke-width="2.5" stroke-linecap="round"></line>
+  <line x1="80" y1="52" x2="80" y2="68" stroke="#fe5f05" stroke-width="2.5" stroke-linecap="round"></line>
+  <line x1="84" y1="52" x2="86" y2="66" stroke="#fe5f05" stroke-width="2.5" stroke-linecap="round"></line>
+</svg></div>
+    <div class="ns3-grad-body">
+      <span class="ns3-grad-num">88%</span>
+      <div class="ns3-grad-txt">of students graduate despite their inability<br>to read or do math properly.</div>
+    </div>
+  </div>
+
+  <hr class="ns3-div">
+  <div class="ns3-banner">…while telling parents that most teachers and schools are highly rated…</div>
+
+  <div class="ns3-2col">
+    <div class="ns3-stat"><span class="ns3-num">97%</span><p class="ns3-lbl">of teachers statewide are rated<br>“excellent or proficient”</p></div>
+    <div class="ns3-stat"><span class="ns3-num">84%</span><p class="ns3-lbl">of schools statewide are rated<br>“exemplary” or “commendable”</p></div>
+  </div>
+
+  <hr class="ns3-div">
+  <div class="ns3-banner">…all while spending rises and enrollment falls.</div>
+
+  <!-- SPENDING SECTION — fully inline, no classes -->
+  <div style="display:flex; flex-wrap:wrap; gap:40px; justify-content:center; max-width:900px; margin:0 auto;">
+
+    <!-- Spending per Student -->
+    <div style="flex:1; min-width:240px;">
+      <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:12px;">
+        <svg width="56" height="56" sc-camel-view-box="0 0 72 72" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="20" r="13" fill="#13294b"></circle><ellipse cx="24" cy="54" rx="22" ry="16" fill="#13294b"></ellipse><text x="40" y="44" font-size="28" font-weight="900" fill="#13294b" font-family="Arial">$</text></svg>
+        <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size: clamp(15px, calc(12.5px + 0.66vw), 22px); color:#13294b; text-decoration:underline;">Spending per Student</span>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:center; gap:12px;">
+        <div>
+          <div style="margin-bottom:6px;">
+            <span style="font-family:'Montserrat',sans-serif; font-weight:700; font-size: clamp(14px, calc(12.9px + 0.28vw), 17px); color:#13294b; display:inline-block; min-width:36px;">2010</span>
+            <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size: clamp(24px,3vw,32px); color:#13294b;">$13,219</span>
+          </div>
+          <div>
+            <span style="font-family:'Montserrat',sans-serif; font-weight:700; font-size: clamp(14px, calc(12.9px + 0.28vw), 17px); color:#13294b; display:inline-block; min-width:36px;">2024</span>
+            <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size:clamp(24px,3vw,32px); color:#fe5f05;">$23,718</span>
+          </div>
+        </div>
+        <div style="width:100px; height:100px; border-radius:50%; background:#fe5f05; display:flex; align-items:center; justify-content:center; flex-shrink:0; align-self:center;">
+          <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size: clamp(14px, calc(11.9px + 0.56vw), 20px); color:#fff; text-align:center; line-height:1.25;">Up<br>79%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Student Enrollment -->
+    <div style="flex:1; min-width:240px;">
+      <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:12px;">
+        <svg width="56" height="50" sc-camel-view-box="0 0 80 76" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="11" r="8" fill="#13294b"></circle><ellipse cx="14" cy="28" rx="12" ry="8" fill="#13294b"></ellipse><circle cx="40" cy="11" r="8" fill="#13294b"></circle><ellipse cx="40" cy="28" rx="12" ry="8" fill="#13294b"></ellipse><circle cx="66" cy="11" r="8" fill="#13294b"></circle><ellipse cx="66" cy="28" rx="12" ry="8" fill="#13294b"></ellipse><circle cx="14" cy="52" r="8" fill="#13294b"></circle><ellipse cx="14" cy="69" rx="12" ry="8" fill="#13294b"></ellipse><circle cx="40" cy="52" r="8" fill="#13294b"></circle><ellipse cx="40" cy="69" rx="12" ry="8" fill="#13294b"></ellipse><circle cx="66" cy="52" r="8" fill="#13294b"></circle><ellipse cx="66" cy="69" rx="12" ry="8" fill="#13294b"></ellipse></svg>
+        <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size: clamp(15px, calc(12.5px + 0.66vw), 22px); color:#13294b; text-decoration:underline;">Student Enrollment</span>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:center; gap:12px;">
+        <div>
+          <div style="margin-bottom:6px;">
+            <span style="font-family:'Montserrat',sans-serif; font-weight:700; font-size: clamp(14px, calc(12.9px + 0.28vw), 17px); color:#13294b; display:inline-block; min-width:36px;">2010</span>
+            <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size: clamp(24px,3vw,32px); color:#13294b;">2,064,312</span>
+          </div>
+          <div>
+            <span style="font-family:'Montserrat',sans-serif; font-weight:700; font-size: clamp(14px, calc(12.9px + 0.28vw), 17px); color:#13294b; display:inline-block; min-width:36px;">2024</span>
+            <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size:clamp(24px,3vw,32px); color:#fe5f05;">1,851,290</span>
+          </div>
+        </div>
+        <div style="width:100px; height:100px; border-radius:50%; background:#fe5f05; display:flex; align-items:center; justify-content:center; flex-shrink:0; align-self:center;">
+          <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size: clamp(14px, calc(11.9px + 0.56vw), 20px); color:#fff; text-align:center; line-height:1.25;">Down<br>10%</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+ </div>
+</section>
+
+
+<section class="section section-orange" id="explorer" style="padding-top:32px; padding-bottom:48px;">
+  <div class="section-inner">
+    <h2 class="section-hed" style="color:#13294b; line-height:1.25; text-align:center; font-family:'Montserrat',sans-serif; font-weight:900; font-size:clamp(30px, 3vw, 40px);">What are your property taxes paying for?<br><span style="font-size:0.72em; font-weight:700; opacity:0.82;"></span></h2>
+
+    <div class="reveal" id="explorerWrap">
+      <div style="max-width:640px; margin:0 auto 32px;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+          <div style="position:relative;">
+            <input id="dn-search" type="text" placeholder="Search district name…" style="width:100%;padding:16px 48px 16px 20px;border-radius:8px;border:none;font-size: clamp(14px, calc(12.9px + 0.28vw), 17px);font-weight:700;font-family:inherit;color:#1a1a1a;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.18);padding-right:20px;">
+          </div>
+          <div style="position:relative;">
+            <sc-raw-select id="sel-city" style="width:100%;padding:16px 48px 16px 20px;border-radius:8px;border:none;font-size: clamp(14px, calc(12.9px + 0.28vw), 17px);font-weight:700;font-family:inherit;color:#1a1a1a;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.18);cursor:pointer;appearance:none;-webkit-appearance:none;">
+              <option value="">All cities</option>
+            </sc-raw-select>
+            <svg style="position:absolute;right:18px;top:50%;transform:translateY(-50%);pointer-events:none;" width="16" height="10" sc-camel-view-box="0 0 16 10" fill="none">
+            <path d="M1 1L8 9L15 1" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          </div>
+        </div>
+        <div style="position:relative;">
+          <sc-raw-select id="sel-district" style="width:100%;padding:16px 48px 16px 20px;border-radius:8px;border:none;font-size: clamp(14px, calc(12.9px + 0.28vw), 17px);font-weight:700;font-family:inherit;color:#1a1a1a;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,0.18);cursor:pointer;appearance:none;-webkit-appearance:none;">
+            <option value="">Loading districts…</option>
+          </sc-raw-select>
+          <svg style="position:absolute;right:18px;top:50%;transform:translateY(-50%);pointer-events:none;" width="16" height="10" sc-camel-view-box="0 0 16 10" fill="none">
+            <path d="M1 1L8 9L15 1" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <div id="dn-count" style="margin-top:8px; text-align:center; font-family:'Montserrat',sans-serif; font-weight:700; font-size:13px; color:#13294b; opacity:0.75;"></div>
+      </div>
+
+      <!-- District narrative (replaces iframe display) -->
+      <div id="district-narrative">
+        <div class="ns3-wrap">
+
+          <!-- District name header -->
+          <div class="dn-header" id="dn-name"></div>
+          <div class="dn-subheader" id="dn-meta"></div>
+
+          <!-- Banner 1 -->
+          <div class="dn-banner" id="dn-b1"></div>
+
+          <!-- Reading + Math stats -->
+          <div style="max-width:700px; margin:0 auto;">
+          <div class="ns3-2col">
+            <div class="ns3-stat ns3-stat-icon">
+              <svg width="96" height="96" sc-camel-view-box="0 0 72 72" xmlns="http://www.w3.org/2000/svg"><path d="M4 8C4 8 32 2 36 10C40 2 68 8 68 8L68 62C68 62 42 56 36 64C30 56 4 62 4 62Z" fill="#13294b"></path><line x1="36" y1="10" x2="36" y2="64" stroke="#fff" stroke-width="2.5"></line><line x1="12" y1="20" x2="32" y2="17" stroke="#fff" stroke-width="2" stroke-linecap="round"></line><line x1="12" y1="30" x2="32" y2="27" stroke="#fff" stroke-width="2" stroke-linecap="round"></line><line x1="12" y1="40" x2="32" y2="37" stroke="#fff" stroke-width="2" stroke-linecap="round"></line><line x1="40" y1="17" x2="60" y2="20" stroke="#fff" stroke-width="2" stroke-linecap="round"></line><line x1="40" y1="27" x2="60" y2="30" stroke="#fff" stroke-width="2" stroke-linecap="round"></line><line x1="40" y1="37" x2="60" y2="40" stroke="#fff" stroke-width="2" stroke-linecap="round"></line></svg>
+              <div class="ns3-text">
+                <span class="ns3-only">Only</span>
+                <span class="ns3-num" id="dn-read-pct"></span>
+                <p class="ns3-lbl">of all students are<br>proficient in <strong>READING</strong></p>
+              </div>
+            </div>
+            <div class="ns3-stat ns3-stat-icon">
+              <svg width="96" height="96" sc-camel-view-box="0 0 72 72" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="64" height="64" rx="9" fill="#13294b"></rect><line x1="36" y1="4" x2="36" y2="68" stroke="#fff" stroke-width="1.5" opacity="0.3"></line><line x1="4" y1="36" x2="68" y2="36" stroke="#fff" stroke-width="1.5" opacity="0.3"></line><text x="18" y="18" font-size="22" font-weight="900" fill="#fff" font-family="Arial" text-anchor="middle" dominant-baseline="central">+</text><text x="54" y="18" font-size="22" font-weight="900" fill="#fff" font-family="Arial" text-anchor="middle" dominant-baseline="central">−</text><text x="18" y="54" font-size="20" font-weight="900" fill="#fff" font-family="Arial" text-anchor="middle" dominant-baseline="central">×</text><text x="54" y="54" font-size="20" font-weight="900" fill="#fff" font-family="Arial" text-anchor="middle" dominant-baseline="central">÷</text></svg>
+              <div class="ns3-text">
+                <span class="ns3-only">Only</span>
+                <span class="ns3-num" id="dn-math-pct"></span>
+                <p class="ns3-lbl">of all students are<br>proficient in <strong>MATH</strong></p>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <hr class="ns3-div" style="margin:27px 0;">
+
+          <!-- Proficiency by Race -->
+          <div style="max-width:680px; margin:0 auto;">
+          <div class="ns3-tbl-wrap">
+            <div class="ns3-icol"><svg width="72" height="64" sc-camel-view-box="-4 -4 88 72" xmlns="http://www.w3.org/2000/svg" overflow="visible"><circle cx="18" cy="14" r="10" fill="#13294b" opacity="0.45"></circle><ellipse cx="18" cy="46" rx="16" ry="12" fill="#13294b" opacity="0.45"></ellipse><circle cx="40" cy="10" r="12" fill="#13294b"></circle><ellipse cx="40" cy="46" rx="20" ry="14" fill="#13294b"></ellipse><circle cx="63" cy="14" r="10" fill="#13294b" opacity="0.65"></circle><ellipse cx="63" cy="46" rx="16" ry="12" fill="#13294b" opacity="0.65"></ellipse></svg><span class="ns3-icol-lbl">Proficiency<br>by Race</span></div>
+            <sc-raw-table class="ns3-tbl ns3-tbl-desktop-only" id="dn-race-desktop">
+              <sc-raw-thead><sc-raw-tr><sc-raw-th style="text-align:left;"></sc-raw-th><sc-raw-th>Black</sc-raw-th><sc-raw-th>Hispanic</sc-raw-th><sc-raw-th>White</sc-raw-th><sc-raw-th>Asian</sc-raw-th></sc-raw-tr></sc-raw-thead>
+              <sc-raw-tbody>
+                <sc-raw-tr id="dn-race-d-read"><sc-raw-td class="ns3-rl">Reading</sc-raw-td><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td></sc-raw-tr>
+                <sc-raw-tr id="dn-race-d-math"><sc-raw-td class="ns3-rl">Math</sc-raw-td><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td></sc-raw-tr>
+              </sc-raw-tbody>
+            </sc-raw-table>
+            <sc-raw-table class="ns3-tbl ns3-tbl-mobile-only" id="dn-race-mobile">
+              <sc-raw-thead><sc-raw-tr><sc-raw-th style="text-align:left;"></sc-raw-th><sc-raw-th>Reading</sc-raw-th><sc-raw-th>Math</sc-raw-th></sc-raw-tr></sc-raw-thead>
+              <sc-raw-tbody id="dn-race-m-body"></sc-raw-tbody>
+            </sc-raw-table>
+          </div>
+          </div>
+
+          <!-- Conditional: grade table (elementary) OR grad stat (HS/unit) -->
+          <div id="dn-grade-block">
+            <hr class="ns3-div">
+            <div class="dn-banner">…yet education officials push students from grade to grade…</div>
+            <div style="max-width:680px; margin:0 auto;">
+            <div class="ns3-tbl-wrap">
+              <div class="ns3-icol"><svg width="72" height="64" sc-camel-view-box="-4 -4 88 80" xmlns="http://www.w3.org/2000/svg" overflow="visible"><circle cx="12" cy="50" r="8" fill="#13294b"></circle><ellipse cx="12" cy="66" rx="11" ry="8" fill="#13294b"></ellipse><circle cx="36" cy="38" r="10" fill="#13294b"></circle><ellipse cx="36" cy="57" rx="14" ry="10" fill="#13294b"></ellipse><circle cx="64" cy="22" r="13" fill="#13294b"></circle><ellipse cx="64" cy="47" rx="18" ry="13" fill="#13294b"></ellipse></svg><span class="ns3-icol-lbl">Reading Proficiency<br>by Grade</span></div>
+              <sc-raw-table class="ns3-tbl ns3-tbl-desktop-only">
+                <sc-raw-thead><sc-raw-tr><sc-raw-th>Grade 3</sc-raw-th><sc-raw-th>Grade 4</sc-raw-th><sc-raw-th>Grade 5</sc-raw-th><sc-raw-th>Grade 6</sc-raw-th><sc-raw-th>Grade 7</sc-raw-th><sc-raw-th>Grade 8</sc-raw-th></sc-raw-tr></sc-raw-thead>
+                <sc-raw-tbody><sc-raw-tr id="dn-grade-d-row"><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td></sc-raw-tr></sc-raw-tbody>
+              </sc-raw-table>
+              <sc-raw-table class="ns3-tbl ns3-tbl-mobile-only">
+                <sc-raw-thead><sc-raw-tr><sc-raw-th>Grade 3</sc-raw-th><sc-raw-th>Grade 4</sc-raw-th><sc-raw-th>Grade 5</sc-raw-th></sc-raw-tr></sc-raw-thead>
+                <sc-raw-tbody>
+                  <sc-raw-tr id="dn-grade-m-row1"><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td></sc-raw-tr>
+                  <sc-raw-tr class="ns3-tbl-subhead"><sc-raw-td>Grade 6</sc-raw-td><sc-raw-td>Grade 7</sc-raw-td><sc-raw-td>Grade 8</sc-raw-td></sc-raw-tr>
+                  <sc-raw-tr id="dn-grade-m-row2"><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td><sc-raw-td></sc-raw-td></sc-raw-tr>
+                </sc-raw-tbody>
+              </sc-raw-table>
+            </div>
+            </div>
+          </div>
+
+          <div id="dn-grad-block">
+            <hr class="ns3-div">
+            <div class="dn-banner">…and graduate a vast majority who don’t have the skills they need to succeed…</div>
+            <div class="ns3-grad">
+              <div class="ns3-grad-icon"><svg width="80" height="70" sc-camel-view-box="0 0 90 78" xmlns="http://www.w3.org/2000/svg"><polygon points="45,4 8,26 45,42 82,26" fill="#13294b"></polygon><path d="M20 30 L20 52 Q45 64 70 52 L70 30 L45 42 Z" fill="#13294b"></path><line x1="80" y1="28" x2="80" y2="52" stroke="#fe5f05" stroke-width="3.5" stroke-linecap="round"></line><line x1="74" y1="52" x2="86" y2="52" stroke="#fe5f05" stroke-width="3" stroke-linecap="round"></line><line x1="76" y1="52" x2="74" y2="66" stroke="#fe5f05" stroke-width="2.5" stroke-linecap="round"></line><line x1="80" y1="52" x2="80" y2="68" stroke="#fe5f05" stroke-width="2.5" stroke-linecap="round"></line><line x1="84" y1="52" x2="86" y2="66" stroke="#fe5f05" stroke-width="2.5" stroke-linecap="round"></line></svg></div>
+              <div class="ns3-grad-body">
+                <span class="ns3-grad-num" id="dn-grad-pct"></span>
+                <div class="ns3-grad-txt">of students graduate despite their inability<br>to read or do math properly.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Teacher rating (all districts, single centered stat) -->
+          <hr class="ns3-div">
+          <div class="dn-banner">…while telling parents that teachers are highly rated…</div>
+          <div class="dn-single-stat">
+            <span class="ns3-num" id="dn-teacher-pct"></span>
+            <p class="ns3-lbl">of district teachers are rated<br>“excellent or proficient”</p>
+          </div>
+
+          <!-- Spending + Enrollment -->
+          <hr class="ns3-div">
+          <div class="dn-banner" id="dn-spend-banner"></div>
+          <div style="display:flex; flex-wrap:wrap; gap:40px; justify-content:center; max-width:900px; margin:0 auto;">
+
+            <!-- Spending per Student -->
+            <div style="flex:1; min-width:240px;">
+              <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:12px;">
+                <svg width="56" height="56" sc-camel-view-box="0 0 72 72" xmlns="http://www.w3.org/2000/svg"><circle cx="24" cy="20" r="13" fill="#13294b"></circle><ellipse cx="24" cy="54" rx="22" ry="16" fill="#13294b"></ellipse><text x="40" y="44" font-size="28" font-weight="900" fill="#13294b" font-family="Arial">$</text></svg>
+                <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size: clamp(15px, calc(12.5px + 0.66vw), 22px); color:#13294b; text-decoration:underline;">Spending per Student</span>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:center; gap:12px;">
+                <div>
+                  <div style="margin-bottom:6px;">
+                    <span style="font-family:'Montserrat',sans-serif; font-weight:700; font-size: clamp(14px, calc(12.9px + 0.28vw), 17px); color:#13294b; display:inline-block; min-width:36px;">2010</span>
+                    <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size: clamp(24px,3vw,32px); color:#13294b;" id="dn-spend-2010"></span>
+                  </div>
+                  <div>
+                    <span style="font-family:'Montserrat',sans-serif; font-weight:700; font-size: clamp(14px, calc(12.9px + 0.28vw), 17px); color:#13294b; display:inline-block; min-width:36px;">2024</span>
+                    <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size:clamp(24px,3vw,32px); color:#fe5f05;" id="dn-spend-2024"></span>
+                  </div>
+                </div>
+                <div style="width:100px; height:100px; border-radius:50%; background:#fe5f05; display:flex; align-items:center; justify-content:center; flex-shrink:0; align-self:center;">
+                  <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size: clamp(14px, calc(11.9px + 0.56vw), 20px); color:#fff; text-align:center; line-height:1.25;" id="dn-spend-circle"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Student Enrollment -->
+            <div style="flex:1; min-width:240px;">
+              <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:12px;">
+                <svg width="56" height="50" sc-camel-view-box="0 0 80 76" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="11" r="8" fill="#13294b"></circle><ellipse cx="14" cy="28" rx="12" ry="8" fill="#13294b"></ellipse><circle cx="40" cy="11" r="8" fill="#13294b"></circle><ellipse cx="40" cy="28" rx="12" ry="8" fill="#13294b"></ellipse><circle cx="66" cy="11" r="8" fill="#13294b"></circle><ellipse cx="66" cy="28" rx="12" ry="8" fill="#13294b"></ellipse><circle cx="14" cy="52" r="8" fill="#13294b"></circle><ellipse cx="14" cy="69" rx="12" ry="8" fill="#13294b"></ellipse><circle cx="40" cy="52" r="8" fill="#13294b"></circle><ellipse cx="40" cy="69" rx="12" ry="8" fill="#13294b"></ellipse><circle cx="66" cy="52" r="8" fill="#13294b"></circle><ellipse cx="66" cy="69" rx="12" ry="8" fill="#13294b"></ellipse></svg>
+                <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size: clamp(15px, calc(12.5px + 0.66vw), 22px); color:#13294b; text-decoration:underline;">Student Enrollment</span>
+              </div>
+              <div style="display:flex; align-items:center; justify-content:center; gap:12px;">
+                <div>
+                  <div style="margin-bottom:6px;">
+                    <span style="font-family:'Montserrat',sans-serif; font-weight:700; font-size: clamp(14px, calc(12.9px + 0.28vw), 17px); color:#13294b; display:inline-block; min-width:36px;">2010</span>
+                    <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size: clamp(24px,3vw,32px); color:#13294b;" id="dn-enroll-2010"></span>
+                  </div>
+                  <div>
+                    <span style="font-family:'Montserrat',sans-serif; font-weight:700; font-size: clamp(14px, calc(12.9px + 0.28vw), 17px); color:#13294b; display:inline-block; min-width:36px;">2024</span>
+                    <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size:clamp(24px,3vw,32px); color:#fe5f05;" id="dn-enroll-2024"></span>
+                  </div>
+                </div>
+                <div style="width:100px; height:100px; border-radius:50%; background:#fe5f05; display:flex; align-items:center; justify-content:center; flex-shrink:0; align-self:center;">
+                  <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size: clamp(14px, calc(11.9px + 0.56vw), 20px); color:#fff; text-align:center; line-height:1.25;" id="dn-enroll-circle"></span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- PDF download button -->
+          <div style="text-align:center; margin-top:36px;">
+            <button id="dn-download-btn" style="background:var(--blue);color:#fff;border:none;padding:14px 32px;border-radius:7px;font-size:15px;font-weight:900;letter-spacing:0.08em;text-transform:uppercase;font-family:inherit;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(19,41,75,0.45)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+              ⬇ Download Full Report Card (PDF)
+            </button>
+          </div>
+
+        </div><!-- /ns3-wrap -->
+      </div><!-- /district-narrative -->
+
+    </div><!-- /explorerWrap -->
+
+  </div><!-- /section-inner -->
+</section>
+
+<!-- ═══════════════ READY TO FIGHT BACK ═══════════════ -->
+<section style="background:var(--blue);padding:72px 24px;">
+  <div style="position:relative;z-index:1;text-align:center;max-width:580px;margin:0 auto;">
+    <h3 style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(2rem,4.5vw,3.4rem);color:#ffffff;line-height:1.1;letter-spacing:-0.01em;text-transform:uppercase;margin:0 0 24px;">Ready to <em style="font-style:italic;color:#fe5f05;">fight back?</em></h3>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+      <a href="https://fightforillinois.org/donate/" style="display:inline-block;text-decoration:none;border:none;cursor:pointer;font-family:'Montserrat',sans-serif;background:#fe5f05;color:#ffffff;padding:20px 52px;font-size:clamp(14px,calc(13.3px + 0.19vw),16px);font-weight:800;letter-spacing:0.1em;text-transform:uppercase;border-radius:4px;box-shadow:0 6px 22px rgba(254,95,5,0.4);transition:transform .15s,box-shadow .15s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 30px rgba(254,95,5,0.55)'" onmouseout="this.style.transform='';this.style.boxShadow='0 6px 22px rgba(254,95,5,0.4)'">Donate</a>
+    </div>
+  </div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#fe5f05&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    const p = this.props || {};
+    (function(){
+      const root = document.getElementById('ffi');
+      if (p.accent) root.style.setProperty('--orange', p.accent);
+
+      // Paths are relative to the page that hosts this file. Override before load
+      // (window.FFI_DATA_URL / window.FFI_CARD_URL) if the assets live elsewhere.
+      const INDEX_URL = window.FFI_INDEX_URL || 'districts-index.json';
+      const DATA_URL = window.FFI_DATA_URL || 'districts.json';
+      const CARD_URL = window.FFI_CARD_URL || 'report-card.html';
+
+      // INDEX is the light list that fills the dropdown (~50 KB). The full
+      // per-district numbers (~545 KB) are fetched once, lazily, the first
+      // time somebody actually picks a district.
+      let INDEX = {};
+      let KEYS = [];
+      let DATA = null;
+      let dataPromise = null;
+
+      function loadData() {
+        if (!dataPromise) dataPromise = fetch(DATA_URL).then(r => r.json()).then(j => { DATA = j; return j; });
+        return dataPromise;
+      }
+
+      const $ = id => document.getElementById(id);
+
+      function optionsFor(keys) {
+        return '<option value="">Choose a district…</option>' + keys.map(k =>
+          '<option value="' + k + '">' + INDEX[k][0] + ' — ' +
+          (INDEX[k][2] === 'e' ? 'Elementary' : 'High School / Unit') + '</option>'
+        ).join('');
+      }
+
+      function applyFilters() {
+        const q = ($('dn-search').value || '').trim().toLowerCase();
+        const city = $('sel-city').value;
+        const keys = KEYS.filter(k => {
+          const d = INDEX[k];
+          if (city && d[1] !== city) return false;
+          if (q && d[0].toLowerCase().indexOf(q) < 0 && (d[1] || '').toLowerCase().indexOf(q) < 0) return false;
+          return true;
+        });
+        const sel = $('sel-district');
+        const prev = sel.value;
+        sel.innerHTML = optionsFor(keys);
+        if (prev && keys.indexOf(prev) >= 0) sel.value = prev;
+        else if (keys.length === 1) { sel.value = keys[0]; showDistrictContent(); }
+        $('dn-count').textContent = keys.length === KEYS.length
+          ? KEYS.length + ' districts'
+          : keys.length + ' of ' + KEYS.length + ' districts';
+        if (!sel.value) document.getElementById('district-narrative').style.display = 'none';
+      }
+
+      function showDistrictContent() {
+        const key = $('sel-district').value;
+        const dn  = $('district-narrative');
+        if (!key) { dn.style.display = 'none'; return; }
+        if (!DATA) {
+          $('dn-count').textContent = 'Loading district data…';
+          loadData().then(() => {
+            if ($('sel-district').value === key) showDistrictContent();
+            applyFilters();
+          });
+          return;
+        }
+        const d = DATA[key];
+        if (!d) { dn.style.display = 'none'; return; }
+
+        $('dn-name').textContent = d.name;
+        $('dn-meta').textContent = d.city + ', IL  ·  Enrollment: ' + d.enrollment + '  ·  ' + d.raceLine;
+        $('dn-b1').textContent = d.shortName + ' students can\u2019t read or do math at grade level\u2026';
+        $('dn-read-pct').textContent = d.reading;
+        $('dn-math-pct').textContent = d.math;
+
+        // Race table — desktop (Black, Hispanic, White, Asian)
+        const raceRows = [$('dn-race-d-read').cells, $('dn-race-d-math').cells];
+        ['read','math'].forEach((k, ri) => {
+          d.race[k].forEach((v, ci) => { raceRows[ri][ci+1].textContent = v; });
+        });
+        // Race table — mobile
+        const races = ['Black','Hispanic','White','Asian'];
+        $('dn-race-m-body').innerHTML = races.map((r, i) =>
+          '<tr><td class="ns3-rl">' + r + '</td><td>' + d.race.read[i] + '</td><td>' + d.race.math[i] + '</td></tr>'
+        ).join('');
+
+        // Grade table (elementary) vs graduation rate (HS/unit)
+        const gradeBlock = $('dn-grade-block');
+        const gradBlock  = $('dn-grad-block');
+        if (d.type === 'elementary' && d.gradeRead) {
+          gradeBlock.style.display = 'block';
+          gradBlock.style.display  = 'none';
+          const dCells = $('dn-grade-d-row').cells;
+          d.gradeRead.forEach((v, i) => { dCells[i].textContent = v; });
+          const m1 = $('dn-grade-m-row1').cells;
+          const m2 = $('dn-grade-m-row2').cells;
+          [0,1,2].forEach(i => { m1[i].textContent = d.gradeRead[i]; m2[i].textContent = d.gradeRead[i+3]; });
+        } else {
+          gradeBlock.style.display = 'none';
+          gradBlock.style.display  = 'block';
+          $('dn-grad-pct').textContent = d.gradRate || 'n/a';
+        }
+
+        $('dn-teacher-pct').textContent = d.teacher;
+        $('dn-spend-banner').textContent = d.spendBanner;
+        $('dn-spend-2010').textContent = d.spend2010;
+        $('dn-spend-2024').textContent = d.spend2024;
+        $('dn-spend-circle').innerHTML = String(d.spendCircle).replace('\n','<br>');
+        $('dn-enroll-2010').textContent = d.enroll2010;
+        $('dn-enroll-2024').textContent = d.enroll2024;
+        $('dn-enroll-circle').innerHTML = String(d.enrollCircle).replace('\n','<br>');
+
+        dn.style.display = 'block';
+        setTimeout(() => { const r = dn.getBoundingClientRect(); window.scrollTo({ top: r.top + window.scrollY - 20, behavior: 'smooth' }); }, 80);
+      }
+
+      function downloadReportCard() {
+        const key = $('sel-district').value;
+        if (!key) return;
+        window.open(CARD_URL + '?d=' + encodeURIComponent(key), '_blank');
+      }
+
+      fetch(INDEX_URL).then(r => r.json()).then(all => {
+        INDEX = all;
+        KEYS = Object.keys(all);
+        const cities = [...new Set(KEYS.map(k => all[k][1]).filter(Boolean))].sort();
+        $('sel-city').innerHTML = '<option value="">All cities</option>' +
+          cities.map(c => '<option value="' + c + '">' + c + '</option>').join('');
+        applyFilters();
+      }).catch(() => {
+        $('sel-district').innerHTML = '<option value="">District data could not be loaded</option>';
+      });
+
+      // ── Reveal on scroll ──────────────────────────────────────────
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+      setTimeout(function(){ document.querySelectorAll('.reveal:not(.vis)').forEach(function(el){ if(el.getBoundingClientRect().top < window.innerHeight*1.15) el.classList.add('vis'); }); }, 250);
+      setTimeout(function(){ document.querySelectorAll('.reveal:not(.vis)').forEach(function(el){ el.classList.add('vis'); }); }, 1600);
+
+      (function(){ var f=document.querySelectorAll('#ffi .hcyc'); if(f.length<2) return; var i=0; setInterval(function(){ f[i].style.opacity='0'; i=(i+1)%f.length; f[i].style.opacity='1'; }, 3500); })();
+
+      var _s=$('dn-search'); if(_s) _s.addEventListener('input', applyFilters);
+      var _c=$('sel-city');  if(_c) _c.addEventListener('change', applyFilters);
+      var _sel=$('sel-district'); if(_sel) _sel.addEventListener('change', showDistrictContent);
+      var _dl=$('dn-download-btn'); if(_dl) _dl.addEventListener('click', downloadReportCard);
+    })();
+  }
+}
+</script>
+</body>
+</html>

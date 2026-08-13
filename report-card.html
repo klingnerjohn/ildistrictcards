@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OUR KIDS CAN'T READ</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #fff; }
+@page { size: letter; margin: 0.4in 0; }
+</style>
+</head>
+<body>
+<div id="card" style="width:612px; margin:0 auto; background:#fff; font-family:'Montserrat',sans-serif;"></div>
+
+<script>
+var DATA_URL = 'districts.json';
+var LOGO_URL = 'ffi-logo.jpg';
+
+var ICON_BOOK = '<svg width="58" height="54" viewBox="0 0 58 54" xmlns="http://www.w3.org/2000/svg">'
+  + '<path d="M29 9 C29 9 19 6 5 8 L5 46 C19 44 29 47 29 47 Z" fill="#E8ECF4" stroke="#13294B" stroke-width="2.5" stroke-linejoin="round"/>'
+  + '<path d="M29 9 C29 9 39 6 53 8 L53 46 C39 44 29 47 29 47 Z" fill="#E8ECF4" stroke="#13294B" stroke-width="2.5" stroke-linejoin="round"/>'
+  + '<line x1="29" y1="9" x2="29" y2="47" stroke="#13294B" stroke-width="1.5"/>'
+  + '<path d="M10 18 Q19 16 26 17" stroke="#FE5F05" stroke-width="2.2" fill="none" stroke-linecap="round"/>'
+  + '<path d="M10 24 Q19 22 26 23" stroke="#FE5F05" stroke-width="2.2" fill="none" stroke-linecap="round"/>'
+  + '<path d="M10 30 Q19 28 26 29" stroke="#FE5F05" stroke-width="2.2" fill="none" stroke-linecap="round"/>'
+  + '<path d="M10 36 Q19 34 26 35" stroke="#FE5F05" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>';
+
+var ICON_MATH = '<svg width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg">'
+  + '<rect x="3" y="3" width="48" height="48" rx="7" ry="7" fill="#E8ECF4" stroke="#13294B" stroke-width="3"/>'
+  + '<line x1="27" y1="3" x2="27" y2="51" stroke="#13294B" stroke-width="2" stroke-dasharray="3,2.5"/>'
+  + '<line x1="3" y1="27" x2="51" y2="27" stroke="#13294B" stroke-width="2" stroke-dasharray="3,2.5"/>'
+  + '<line x1="15" y1="12" x2="15" y2="21" stroke="#FE5F05" stroke-width="3.5" stroke-linecap="round"/>'
+  + '<line x1="10.5" y1="16.5" x2="19.5" y2="16.5" stroke="#FE5F05" stroke-width="3.5" stroke-linecap="round"/>'
+  + '<line x1="34.5" y1="16.5" x2="43.5" y2="16.5" stroke="#FE5F05" stroke-width="3.5" stroke-linecap="round"/>'
+  + '<line x1="10.5" y1="33" x2="19.5" y2="42" stroke="#FE5F05" stroke-width="3.5" stroke-linecap="round"/>'
+  + '<line x1="19.5" y1="33" x2="10.5" y2="42" stroke="#FE5F05" stroke-width="3.5" stroke-linecap="round"/>'
+  + '<line x1="34.5" y1="37.5" x2="43.5" y2="37.5" stroke="#FE5F05" stroke-width="3.5" stroke-linecap="round"/>'
+  + '<circle cx="39" cy="32" r="2.2" fill="#FE5F05"/><circle cx="39" cy="43" r="2.2" fill="#FE5F05"/></svg>';
+
+var ICON_RACE = '<svg width="50" height="34" viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">'
+  + '<circle cx="16" cy="10" r="8.5" fill="#D8E0E8" stroke="#13294B" stroke-width="1.8"/>'
+  + '<circle cx="34" cy="10" r="8.5" fill="#9AA8BA" stroke="#13294B" stroke-width="1.8"/>'
+  + '<circle cx="52" cy="10" r="8.5" fill="#B4BEC9" stroke="#13294B" stroke-width="1.8"/>'
+  + '<path d="M2 48 C2 36 8 28 16 28 C24 28 30 36 30 48 Z" fill="#D8E0E8" stroke="#13294B" stroke-width="1.8"/>'
+  + '<path d="M20 48 C20 36 26 28 34 28 C42 28 48 36 48 48 Z" fill="#9AA8BA" stroke="#13294B" stroke-width="1.8"/>'
+  + '<path d="M38 48 C38 36 44 28 52 28 C60 28 66 36 66 48 Z" fill="#B4BEC9" stroke="#13294B" stroke-width="1.8"/></svg>';
+
+var ICON_CAP = '<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">'
+  + '<polygon points="20,3 40,13 20,23 0,13" fill="#13294B"/>'
+  + '<path d="M7 18 L7 29 C7 29 13 34 20 34 C27 34 33 29 33 29 L33 18" fill="#13294B"/>'
+  + '<line x1="37" y1="13" x2="37" y2="25" stroke="#FE5F05" stroke-width="2.5"/>'
+  + '<circle cx="37" cy="26" r="2.8" fill="#FE5F05"/></svg>';
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function isNA(v) { return v == null || v === '' || v === 'n/a'; }
+
+/* A single number cell in the race table — italic grey treatment when suppressed. */
+function raceCell(v, w) {
+  var na = isNA(v);
+  return '<div style="width:' + w + 'px; font-size:12px; font-weight:' + (na ? '500' : '700')
+    + '; color:#13294B; text-align:center;' + (na ? ' font-style:italic;' : '') + '">' + esc(na ? 'n/a' : v) + '</div>';
+}
+
+function statRow(icon, pctVal, subject, padTop, padBottom) {
+  return '<div style="display:flex; align-items:center; justify-content:center; padding:' + padTop + 'px 23px ' + padBottom + 'px 23px;">'
+    + '<div style="flex:0 0 72px; display:flex; align-items:center; justify-content:center;">' + icon + '</div>'
+    + '<div style="flex:0 0 66px; font-size:24px; font-weight:800; color:#13294B; line-height:1; padding-left:14px;">Only</div>'
+    + '<div style="flex:0 0 80px; font-size:40px; font-weight:900; color:#FE5F05; line-height:1; padding-left:14px;">' + esc(pctVal) + '</div>'
+    + '<div style="flex:0 0 220px; font-size:16px; font-weight:700; color:#13294B; line-height:1.4; padding-left:14px;">'
+    + 'of all students are<br>proficient in <span style="color:#FE5F05;">' + subject + '</span></div>'
+    + '</div>';
+}
+
+function gradeTable(g) {
+  var labels = ['Grade 3', 'Grade 4', 'Grade 5', 'Grade 6', 'Grade 7', 'Grade 8'];
+  var head = labels.map(function (l) {
+    return '<div style="flex:1; font-size:11px; font-weight:600; color:#13294B; text-align:center;">' + l + '</div>';
+  }).join('');
+  var vals = g.map(function (v) {
+    return '<div style="flex:1; font-size:15px; font-weight:700; color:#FE5F05; text-align:center;">' + esc(isNA(v) ? 'n/a' : v) + '</div>';
+  }).join('');
+  return '<div style="padding:0 23px 13px 23px;"><div style="display:flex; align-items:flex-start; gap:12px;">'
+    + '<div style="min-width:78px; text-align:right; flex-shrink:0; padding-top:2px;">'
+    + '<div style="font-size:13px; font-weight:800; color:#FE5F05; line-height:1.3;">READING</div>'
+    + '<div style="font-size:13px; font-weight:800; color:#13294B; line-height:1.3;">by grade</div></div>'
+    + '<div style="flex:1;">'
+    + '<div style="display:flex; border-bottom:2px solid #13294B; padding-bottom:4px; margin-bottom:4px;">' + head + '</div>'
+    + '<div style="display:flex;">' + vals + '</div>'
+    + '</div></div></div>';
+}
+
+function raceTable(rc) {
+  var widths = [47, 47, 60, 47];
+  var head = ['White', 'Black', 'Hispanic', 'Asian'].map(function (l, i) {
+    return '<div style="width:' + widths[i] + 'px; font-size:11px; font-weight:600; color:#13294B; text-align:center;">' + l + '</div>';
+  }).join('');
+  var readCells = rc.read.map(function (v, i) { return raceCell(v, widths[i]); }).join('');
+  var mathCells = rc.math.map(function (v, i) { return raceCell(v, widths[i]); }).join('');
+  return '<div style="padding:0 23px 13px 23px; display:flex; justify-content:center;">'
+    + '<div style="background:#F4F5F7; border-radius:4px; padding:10px 12px; width:auto; display:inline-block;">'
+    + '<div style="display:flex; gap:8px; align-items:center;">'
+    + '<div style="min-width:62px; flex-shrink:0; text-align:center;">'
+    + '<div style="font-size:11px; font-weight:800; color:#13294B; line-height:1.3; margin-bottom:5px;">Proficiency<br>by race</div>'
+    + ICON_RACE + '</div>'
+    + '<div style="display:flex; flex-direction:column; gap:0;">'
+    + '<div style="display:flex; padding-bottom:4px; border-bottom:2px solid #13294B; margin-bottom:6px; padding-left:54px;">' + head + '</div>'
+    + '<div style="display:flex; align-items:center; padding-bottom:4px; border-bottom:1px solid #C8CDD6; margin-bottom:5px;">'
+    + '<div style="width:54px; font-size:11.5px; font-weight:700; color:#FE5F05;">Reading</div>' + readCells + '</div>'
+    + '<div style="display:flex; align-items:center;">'
+    + '<div style="width:54px; font-size:11.5px; font-weight:700; color:#FE5F05;">Math</div>' + mathCells + '</div>'
+    + '</div></div></div></div>';
+}
+
+function gradCallout(rate) {
+  return '<div style="padding:11px 23px 11px 15px; display:flex; align-items:center; gap:8px;">'
+    + '<div style="font-size:30px; font-weight:800; color:#13294B; line-height:1.2; white-space:nowrap; letter-spacing:-1px;">'
+    + '...and yet <span style="font-weight:900;">' + esc(isNA(rate) ? 'n/a' : rate) + '</span> of students graduate</div>'
+    + ICON_CAP + '</div>';
+}
+
+/* Orange circle: "Up\n134%" — DOWN gets a smaller word so it fits the 58px disc. */
+function trendCircle(raw) {
+  var parts = String(raw || 'n/a').split('\n');
+  var word = (parts[0] || 'n/a').toUpperCase();
+  var amt = parts[1] || '';
+  var wordSize = word.length > 2 ? 10 : 12;
+  return '<div style="width:58px; height:58px; border-radius:50%; background:#FE5F05; display:flex; flex-direction:column; align-items:center; justify-content:center; flex-shrink:0;">'
+    + '<div style="font-size:' + wordSize + 'px; font-weight:800; color:#fff; line-height:1.2;">' + esc(word) + '</div>'
+    + (amt ? '<div style="font-size:12px; font-weight:800; color:#fff; line-height:1.2;">' + esc(amt) + '</div>' : '')
+    + '</div>';
+}
+
+function trendRow(label, raw, v2010, v2024) {
+  return '<div style="display:flex; align-items:center; gap:8px;">'
+    + '<div style="width:108px; text-align:center;">'
+    + '<div style="font-size:13px; font-weight:700; color:#FE5F05; line-height:1.35;">' + label + '</div></div>'
+    + trendCircle(raw)
+    + '<div style="width:100px;">'
+    + '<div style="font-size:14px; font-weight:700; color:#13294B; line-height:1.65;">2010&nbsp;&nbsp;<span style="color:#FE5F05; font-weight:800;">' + esc(v2010) + '</span></div>'
+    + '<div style="font-size:14px; font-weight:700; color:#13294B; line-height:1.65;">2024&nbsp;&nbsp;<span style="color:#FE5F05; font-weight:800;">' + esc(v2024) + '</span></div>'
+    + '</div></div>';
+}
+
+function render(d) {
+  var html = '';
+
+  /* ===== HEADER BAND ===== */
+  html += '<div style="background:#FE5F05; padding:14px 23px 12px 23px;">'
+    + '<div style="font-size:34px; font-weight:900; font-style:italic; color:#13294B; line-height:1.1;">OUR KIDS CAN&rsquo;T READ</div>'
+    + '<div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:4px;">'
+    + '<div style="font-size:28px; font-weight:900; color:#fff; line-height:1.05;">' + esc(d.name) + '</div>'
+    + '<div style="font-size:12px; font-weight:700; color:#fff; text-align:right; line-height:1.7;">'
+    + 'City: ' + esc(d.city) + '<br>Enrollment: ' + esc(d.enrollment) + '<br>(' + esc(d.raceLine) + ')'
+    + '</div></div></div>'
+    + '<div style="background:#13294B; height:7px;"></div>';
+
+  /* ===== SECTION HEADING ===== */
+  html += '<div style="padding:14px 23px 0 15px; font-size:28px; font-weight:800; color:#13294B; line-height:1.2; white-space:nowrap; overflow:hidden; text-align:left; letter-spacing:-1.5px;">Our kids can&rsquo;t read, do math at grade level...</div>';
+
+  /* ===== READING + MATH ===== */
+  html += statRow(ICON_BOOK, d.reading, 'READING', 18, 10);
+  html += statRow(ICON_MATH, d.math, 'MATH', 10, 18);
+
+  /* ===== ELEMENTARY: reading by grade  |  HS/UNIT: nothing here ===== */
+  if (d.type === 'elementary' && d.gradeRead) html += gradeTable(d.gradeRead);
+
+  /* ===== PROFICIENCY BY RACE ===== */
+  html += raceTable(d.raceCard);
+
+  /* ===== HS/UNIT: graduation callout ===== */
+  if (d.type !== 'elementary') html += gradCallout(d.gradRate);
+
+  /* ===== ACCOUNTABILITY ===== */
+  html += '<div style="padding:8px 23px 0 15px;">'
+    + '<div style="height:3px; background:#FE5F05; margin-bottom:8px;"></div>'
+    + '<div style="font-size:30px; font-weight:800; color:#13294B; line-height:1.2; white-space:nowrap; letter-spacing:-1px;">...and there&rsquo;s little-to-no accountability</div></div>';
+
+  html += '<div style="display:flex; padding:14px 23px 18px 23px; align-items:center; justify-content:center; gap:10px;">'
+    + '<div style="flex:0 0 145px; text-align:center;">'
+    + '<div style="font-size:48px; font-weight:900; color:#FE5F05; line-height:1; letter-spacing:-1px;">' + esc(isNA(d.teacher) ? 'n/a' : d.teacher) + '</div>'
+    + '<div style="font-size:11.5px; font-weight:700; color:#13294B; line-height:1.5; margin-top:2px; text-align:center;">of district teachers<br>are rated<br>&ldquo;excellent or proficient&rdquo;</div></div>'
+    + '<div style="display:flex; flex-direction:column; gap:10px;">'
+    + trendRow('All-in spending<br>per student', d.spendCircle, d.spend2010, d.spend2024)
+    + trendRow('Student<br>enrollment', d.enrollCircle, d.enroll2010, d.enroll2024)
+    + '</div></div>';
+
+  /* ===== FOOTER ===== */
+  html += '<div style="height:3px; background:#FE5F05;"></div>'
+    + '<div style="background:#13294B; padding:12px 22px; display:flex; align-items:center; min-height:66px; position:relative;">'
+    + '<div style="flex:1; font-size:8.5px; font-weight:400; color:#fff; line-height:1.65;">'
+    + 'Source: Illinois State Board of Education,<br>Illinois Report Card 2024<br>Note: n/a signifies data is &ldquo;not available&rdquo;</div>'
+    + '<div style="position:absolute; left:50%; transform:translateX(-50%); font-size:13px; font-weight:700; color:#FE5F05; text-align:center; white-space:nowrap;">FightForIllinois.org</div>'
+    + '<div style="flex:1; display:flex; justify-content:flex-end;">'
+    + '<img id="ffi-logo" src="' + LOGO_URL + '" alt="Fight for Illinois" style="height:48px; width:auto; display:block;"></div>'
+    + '</div>';
+
+  document.getElementById('card').innerHTML = html;
+  document.title = "OUR KIDS CAN'T READ — " + d.name;
+}
+
+(function () {
+  var q = new URLSearchParams(location.search);
+  var key = q.get('d') || q.get('district') || '';
+  var autoPrint = q.get('print') !== '0';
+
+  fetch(DATA_URL).then(function (r) { return r.json(); }).then(function (all) {
+    var d = all[key];
+    if (!d) {
+      document.getElementById('card').innerHTML =
+        '<div style="padding:40px 24px; font-size:16px; font-weight:700; color:#13294B;">District not found.</div>';
+      return;
+    }
+    render(d);
+    if (!autoPrint) return;
+    /* Wait for the logo + webfont so the print sheet is not missing artwork. */
+    var img = document.getElementById('ffi-logo');
+    var ready = [document.fonts ? document.fonts.ready : Promise.resolve()];
+    if (img && !img.complete) {
+      ready.push(new Promise(function (res) { img.onload = img.onerror = res; }));
+    }
+    Promise.all(ready).then(function () { setTimeout(function () { window.print(); }, 350); });
+  }).catch(function (e) {
+    document.getElementById('card').innerHTML =
+      '<div style="padding:40px 24px; font-size:15px; font-weight:700; color:#13294B;">Could not load district data.<br><span style="font-weight:500;">' + esc(e.message) + '</span></div>';
+  });
+})();
+</script>
+</body>
+</html>
