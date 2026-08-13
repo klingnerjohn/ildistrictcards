@@ -883,6 +883,21 @@ class Component extends DCLogic {
 
       (function(){ var f=document.querySelectorAll('#ffi .hcyc'); if(f.length<2) return; var i=0; setInterval(function(){ f[i].style.opacity='0'; i=(i+1)%f.length; f[i].style.opacity='1'; }, 3500); })();
 
+      // When embedded in an iframe, report our height to the host page so it can
+      // size the frame and avoid a nested scrollbar. Host listens for
+      // {ffiHeight:<px>} — see the WordPress/Avada snippet in README-upload.md.
+      if (window.parent !== window) {
+        let lastH = 0;
+        const postHeight = () => {
+          const h = Math.ceil(document.documentElement.scrollHeight);
+          if (Math.abs(h - lastH) > 2) { lastH = h; window.parent.postMessage({ ffiHeight: h }, '*'); }
+        };
+        if (window.ResizeObserver) new ResizeObserver(postHeight).observe(document.documentElement);
+        window.addEventListener('load', postHeight);
+        setInterval(postHeight, 600);
+        postHeight();
+      }
+
       var _s=$('dn-search'); if(_s) _s.addEventListener('input', applyFilters);
       var _c=$('sel-city');  if(_c) _c.addEventListener('change', applyFilters);
       var _sel=$('sel-district'); if(_sel) _sel.addEventListener('change', showDistrictContent);
